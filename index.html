@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>UNIDAD CANVAS</title>
+
+	<style type="text/css">
+		.container {
+			width: 60%;
+			margin: auto;
+			background-color: #e55149;
+			min-height: 450px;
+		}
+
+		canvas {
+			background-color: #f0f0f0;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div class="container">
+		<canvas id="canvas" width="" height="380px">
+			Tu navegador no soporta canvas
+		</canvas>
+		<img id="grito" src="grito.png" style="display: none;">
+	</div>
+
+	<script type="text/javascript">
+
+		window.onload = function () {
+			var canvas = document.getElementById('canvas');
+			if (canvas.getContext) {
+				var ctx = canvas.getContext('2d');
+
+				//1.- Cuadros
+
+				//ctx.fillStyle = "rgb(200,0,0)";
+				//ctx.fillRect (15,15,75,65);
+
+				//ctx.fillStyle = "rgba(0,0,200,0.5)";
+				//ctx.fillRect (40,40,75,65);
+
+				//2.- Linea
+
+				//ctx.moveTo(0,0);
+				//ctx.lineTo(325,157);
+				//ctx.stroke();
+
+				//3.- Circunferencia
+
+				//ctx.beginPath();
+				//ctx.arc(100,70,50,0,2 * Math.PI);
+				//ctx.stroke();
+
+				//4.- Texto Hello Word
+
+				//ctx.font = "25px Montserrat";
+				//ctx.fillText("Hello World", 20,50);
+
+				//5.- Texto Hello Word Silueta
+
+				//ctx.font = "25px Montserrat";
+				//ctx.strokeText("Hello World", 20,50);
+
+				//6.- Degradado
+
+				//var grd = ctx.createLinearGradient(0,0,250,0);
+				//grd.addColorStop(0,"red");
+				//grd.addColorStop(1,"white");
+
+				//ctx.fillStyle = grd;
+				//ctx.fillRect(25,25,200,95);
+
+				//7.- Degradado circular
+
+				//var grd = ctx.createRadialGradient(125,80,15,120,80,150);
+				//grd.addColorStop(0,"red");
+				//grd.addColorStop(1,"white");
+
+				//ctx.fillStyle = grd;
+				//ctx.fillRect(25,25,200,95);
+
+				//8.- Imagen
+
+				//var img = document.getElementById("grito");
+				//ctx.drawImage(img,25,25);
+
+
+
+
+
+
+
+
+
+				
+				//11.- Eventos
+
+				selector = true
+
+				red = "#e55149"
+				black = "#000000"
+
+				color = red
+				radio = 90
+
+				canvas.addEventListener('mousedown', function (evt) {
+					ctx.fillStyle = color;
+					ctx.beginPath();
+					ctx.arc(evt.offsetX, evt.offsetY, radio, 0, 2 * Math.PI);
+					ctx.fill();
+				});
+
+				canvas.addEventListener('mouseout', function (evt) {
+					if (selector) {
+						selector = false
+						color = black
+						radio = 15
+					} else {
+						selector = true
+						color = red
+						radio = 90
+					}
+				});
+				document.addEventListener('keydown', function (evt) {
+					radio = 5
+					color = black
+				})
+
+			}
+
+		}
+	</script>
+
+</body>
+
+</html>
