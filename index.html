@@ -6,14 +6,15 @@
 
 	<style type="text/css">
 		.container {
-			width: 60%;
+			width: 90%;
 			margin: auto;
 			background-color: #e55149;
-			min-height: 450px;
+			min-height: 500px;
 		}
 
 		canvas {
-			background-color: #f0f0f0;
+			background-color: #b5b2b2;
+			width: 100%;
 		}
 	</style>
 
@@ -88,47 +89,234 @@
 				//var img = document.getElementById("grito");
 				//ctx.drawImage(img,25,25);
 
+				//9.- Avatar
+
+
+				//----------------------------cabeza-------------------------
+				//cuello
+				//ctx.fillStyle = "#ecaea7";
+				//ctx.fillRect(125, 130, 25, 10);
+				//cabeza
+				//ctx.beginPath();
+				//ctx.arc(138, 105, 30, 0, 2 * Math.PI);
+				//ctx.fill();
+				//ojoIzq
+				//ctx.fillStyle = "#000";
+				//ctx.beginPath();
+				//ctx.arc(128, 100, 3, 0, 2 * Math.PI);
+				//ctx.fill();
+				//ojoDer
+				//ctx.beginPath();
+				//ctx.arc(148, 100, 3, 0, 2 * Math.PI);
+				//ctx.fill();
+				//boca
+				// ctx.moveTo(125,120);
+				// ctx.lineTo(150,120);
+				// ctx.stroke();
+				//gorra
+				// ctx.fillStyle = "#000";
+				// ctx.beginPath();
+				// ctx.moveTo(105,90);
+				// ctx.lineTo(185,90);
+				// ctx.lineTo(185, 87);
+				// ctx.lineTo(165, 87);
+				// ctx.lineTo(165, 67);
+				// ctx.lineTo(145, 57);
+				// ctx.lineTo(125, 57);
+				// ctx.lineTo(105, 67);
+				// ctx.fill();
+
+
+				// //----------------------------tronco-------------------------
+				// ctx.fillStyle = "#fff";
+				// ctx.fillRect (100,140,75,95);
+				
+				// //azul
+				// ctx.fillStyle = "#3082c5";
+				// ctx.beginPath();
+				// ctx.moveTo(120,140);
+				// ctx.lineTo(175,205);
+				// ctx.lineTo(175, 140);
+				// ctx.lineTo(120, 140);
+				// ctx.fill();
+
+				// //rojo
+				// ctx.fillStyle = "#ff3131";
+				// ctx.beginPath();
+				// ctx.moveTo(100, 170);
+				// ctx.lineTo(160, 235);
+				// ctx.lineTo(100, 235);
+				// ctx.lineTo(100, 190);
+				// ctx.fill();
+
+				// //manga der
+				// ctx.fillStyle = "#ff3131";
+				// ctx.beginPath();
+				// ctx.moveTo(175, 140);
+				// ctx.lineTo(175, 170);
+				// ctx.lineTo(185, 180);
+				// ctx.lineTo(200, 160);
+				// ctx.lineTo(175, 140);
+				// ctx.fill();
+
+				// //manga izq
+				// ctx.fillStyle = "#3082c5";
+				// ctx.beginPath();
+				// ctx.moveTo(100, 140);
+				// ctx.lineTo(100, 170);
+				// ctx.lineTo(90, 180);
+				// ctx.lineTo(75, 160);
+				// ctx.lineTo(100, 140);
+				// ctx.fill();
+
+
+				// //logo
+				// ctx.fillStyle = "#f1c065";
+				// ctx.font = "10px Montserrat";
+				// ctx.fillText("TH", 153,160);
+
+				// //----------------------------brazos-------------------------
+
+				// //izq
+				// ctx.fillStyle = "#ecaea7";
+				// ctx.beginPath();
+				// ctx.moveTo(78, 165);
+				// ctx.lineTo(40, 200);
+				// ctx.lineTo(50, 210);
+				// ctx.lineTo(85, 175);
+				// ctx.fill();
+
+				// //mano
+				// ctx.beginPath();
+				// ctx.arc(45, 205, 10, 0, 2 * Math.PI);
+				// ctx.fill();
+
+
+				// //der
+				// ctx.fillStyle = "#ecaea7";
+				// ctx.beginPath();
+				// ctx.moveTo(197, 165);
+				// ctx.lineTo(230, 200);
+				// ctx.lineTo(220, 210);
+				// ctx.lineTo(188, 175);
+				// ctx.fill();
+
+				// //mano
+				// ctx.beginPath();
+				// ctx.arc(225, 205, 10, 0, 2 * Math.PI);
+				// ctx.fill();
 
 
 
+				// //----------------------------pantalon-------------------------
+				
+				// ctx.fillStyle = "#1a2b47";
+				// ctx.beginPath();
+				// ctx.moveTo(100,235 );
+				// ctx.lineTo(100, 325);
+				// ctx.lineTo(120, 325);
+				// ctx.lineTo(137, 260);
+				// ctx.lineTo(154, 325);
+				// ctx.lineTo(175, 325);
+				// ctx.lineTo(175, 235);
+				// ctx.fill();
+
+				// //----------------------------zapatos-------------------------
+
+				// //izq
+				// ctx.fillStyle = "#db9224";
+				// ctx.fillRect (99,325,30,13);
+
+				// //der
+				// ctx.fillStyle = "#db9224";
+				// ctx.fillRect(153, 325, 30, 13);
 
 
+				//10.- Dibujo casa
+
+				//casa
+				ctx.fillStyle = "#fff";
+				ctx.fillRect (150,180,115,125);
+
+				ctx.fillStyle = "#340412";
+				ctx.fillRect (188,270,40,35);
+
+				ctx.fillStyle = "#000";
+				ctx.fillRect (170,200,25,25);
+
+				ctx.fillStyle = "#000";
+				ctx.fillRect (210,200,25,25);
+
+				//sol
+				ctx.fillStyle ="fff333"
+				ctx.beginPath();
+				ctx.arc(268, 100, 25, 0, 2 * Math.PI);
+				ctx.fill();
+
+				//arbol
+				ctx.fillStyle = "#693b21";
+				ctx.fillRect(50, 180, 25, 125);
+
+				ctx.fillStyle = "14a30c"
+				ctx.beginPath();
+				ctx.arc(88, 150, 50, 0, 2 * Math.PI);
+				ctx.fill();
+				ctx.beginPath();
+				ctx.arc(48, 150, 50, 0, 2 * Math.PI);
+				ctx.fill();
+				ctx.beginPath();
+				ctx.arc(70, 100, 50, 0, 2 * Math.PI);
+				ctx.fill();
+
+				ctx.fillStyle = "e55149"
+				ctx.beginPath();
+				ctx.arc(88, 150, 10, 0, 2 * Math.PI);
+				ctx.fill();
+				ctx.beginPath();
+				ctx.arc(48, 150, 10, 0, 2 * Math.PI);
+				ctx.fill();
+				ctx.beginPath();
+				ctx.arc(68, 100, 10, 0, 2 * Math.PI);
+				ctx.fill();
 
 
+				//piso
+				ctx.fillStyle = "0e7109"
+				ctx.fillRect(0, 320, 300, 15);
 
 				
 				//11.- Eventos
 
-				selector = true
+				//selector = true
 
-				red = "#e55149"
-				black = "#000000"
+				//red = "#e55149"
+				//black = "#000000"
 
-				color = red
-				radio = 90
+				//color = red
+				//radio = 90
 
-				canvas.addEventListener('mousedown', function (evt) {
-					ctx.fillStyle = color;
-					ctx.beginPath();
-					ctx.arc(evt.offsetX, evt.offsetY, radio, 0, 2 * Math.PI);
-					ctx.fill();
-				});
+				//canvas.addEventListener('mousedown', function (evt) {
+					//ctx.fillStyle = color;
+					//ctx.beginPath();
+					//ctx.arc(evt.offsetX, evt.offsetY, radio, 0, 2 * Math.PI);
+					//ctx.fill();
+				//});
 
-				canvas.addEventListener('mouseout', function (evt) {
-					if (selector) {
-						selector = false
-						color = black
-						radio = 15
-					} else {
-						selector = true
-						color = red
-						radio = 90
-					}
-				});
-				document.addEventListener('keydown', function (evt) {
-					radio = 5
-					color = black
-				})
+				//canvas.addEventListener('mouseout', function (evt) {
+					//if (selector) {
+						//selector = false
+						//color = black
+						//radio = 15
+					//} else {
+						//selector = true
+					//	color = red
+					//	radio = 90
+					//};
+			//	});
+			//	document.addEventListener('keydown', function (evt) {
+				//	radio = 5
+				//	color = black
+				//});
 
 			}
 
