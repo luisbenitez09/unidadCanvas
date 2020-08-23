@@ -8,7 +8,7 @@
         .container {
             width: 90%;
             margin: auto;
-            background-color: #e55149;
+            background-color: #17a7da;
             min-height: 400px;
         }
 
@@ -24,30 +24,17 @@
         <canvas id="canvas" width="" height="380px">
             Tu navegador no soporta canvas
         </canvas>
-        <img id="grito" src="grito.png" style="display: none;">
     </div>
 
     <script type="text/javascript">
-        var canvas = null,
-            ctx = null,
-            x = 0,
-            y = 0;
-        var IZQ = 1,
-            AR = 0,
-            DER = 2,
-            AB = 3;
+        var canvas = null, ctx = null, x = 0, y = 0;
+        var IZQ = 1, AR = 0, DER = 2, AB = 3;
         var lastPress = DER;
         var nivel = 1;
-        var jugador = null,
-            obstaculo = null;
-        var vidas = 5,
-            puntos = 0,
-            puntajeMax = 0;
-        //window.onload = function () {
-        var canvas = document.getElementById('canvas');
-        if (canvas.getContext) {
-            //var ctx = canvas.getContext('2d');
-            //--------------------------------------------------------------Ejercicio 12-----------------------------------------
+        var jugador = null, obstaculo = null;
+        var vidas = 5, puntos = 0, puntajeMax = 0;
+            
+        //--------------------------------------------------------------Ejercicio 12-----------------------------------------
 
 
             window.requestAnimationFrame = (function () {
@@ -79,15 +66,31 @@
                         return true;
                     }
                 }
+            }
 
+            function sumarPuntos() {
+                puntos += 1;
+                if (puntos> puntajeMax) {
+                    puntajeMax = puntos;
+                }
+                ctx.fillStyle = "#17a7da"
+                ctx.fillRect(0,360, canvas.width, 20);
+
+                ctx.fillStyle = "#000";
+                ctx.font = "12px Helvetica";
+                ctx.fillText("Puntaje: "+ puntos, 20,377);
+                ctx.fillText("Vidas: " + vidas, 125,377);
+                ctx.fillText("Puntaje Max: " + puntajeMax, 200,377);
+                
 
             }
 
             function paint(ctx) {
-                ctx.fillStyle = "#08b1ec";
-                ctx.fillRect(0, 0, canvas.width, canvas.height - 50);
+                ctx.fillStyle = "#000   ";
+                ctx.fillRect(0, 0, canvas.width, canvas.height-15);
                 jugador.paint(ctx);
                 obstaculo.paint(ctx);
+                
             }
 
             function upt() {
@@ -109,13 +112,13 @@
                 if (lastPress == AR) {
                     jugador.y -= nivel;
                     if (jugador.y < 0) {
-                        jugador.y = canvas.height;
+                        jugador.y = canvas.height-25;
                     }
                 }
 
                 if (lastPress == AB) {
                     jugador.y += nivel;
-                    if (jugador.y >= canvas.height) {
+                    if (jugador.y >= canvas.height-25) {
                         jugador.y = -10;
                     }
                 }
@@ -123,11 +126,8 @@
 
                 if (jugador.intersects(obstaculo)) {
                     obstaculo.x = random(canvas.width - 10);
-                    obstaculo.y = random(canvas.height - 10);
-                    puntaje += 1;
-                    if (puntaje > puntajeMax) {
-                        puntajeMax = puntaje;
-                    }
+                    obstaculo.y = random(canvas.height - 30);
+                    sumarPuntos();
                 }
 
             }
@@ -145,6 +145,11 @@
                 jugador = new Rectangulo(x, y, 10, 10, "#1dcd55");
                 obstaculo = new Rectangulo((canvas.width / 2 - 10), (canvas.height / 2 - 10), 10, 10, "#fa5b05")
 
+                ctx.fillStyle = "#000";
+                ctx.font = "12px Helvetica";
+                ctx.fillText("Puntaje: 0", 20,377);
+                ctx.fillText("Vidas: " + vidas, 125,377);
+                ctx.fillText("Puntaje Max: " + puntajeMax, 200,377);
 
                 run();
             }
@@ -169,9 +174,6 @@
                 return Math.floor(Math.random() * x);
             }
 
-        }
-
-        //}
     </script>
 
 </body>
