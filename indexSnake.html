@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>UNIDAD CANVAS</title>
+
+    <style type="text/css">
+        .container {
+            width: 90%;
+            margin: auto;
+            background-color: #e55149;
+            min-height: 400px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 750px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <canvas id="canvas" width="" height="380px">
+            Tu navegador no soporta canvas
+        </canvas>
+        <img id="grito" src="grito.png" style="display: none;">
+    </div>
+
+    <script type="text/javascript">
+        var canvas = null,
+            ctx = null,
+            x = 0,
+            y = 0;
+        var IZQ = 1,
+            AR = 0,
+            DER = 2,
+            AB = 3;
+        var lastPress = DER;
+        var nivel = 1;
+        var jugador = null,
+            obstaculo = null;
+        var vidas = 5,
+            puntos = 0,
+            puntajeMax = 0;
+        //window.onload = function () {
+        var canvas = document.getElementById('canvas');
+        if (canvas.getContext) {
+            //var ctx = canvas.getContext('2d');
+            //--------------------------------------------------------------Ejercicio 12-----------------------------------------
+
+
+            window.requestAnimationFrame = (function () {
+                return window.requestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 17);
+                    }
+            }());
+
+            function Rectangulo(x, y, width, height, color) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                this.color = color;
+
+                this.paint = function (ctx) {
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+
+                this.intersects = function (target) {
+                    if (this.x < target.x + target.width &&
+                        this.x + this.width > target.x &&
+                        this.y < target.y + target.height &&
+                        this.y + this.height > target.y) {
+                        return true;
+                    }
+                }
+
+
+            }
+
+            function paint(ctx) {
+                ctx.fillStyle = "#08b1ec";
+                ctx.fillRect(0, 0, canvas.width, canvas.height - 50);
+                jugador.paint(ctx);
+                obstaculo.paint(ctx);
+            }
+
+            function upt() {
+
+                if (lastPress == DER) {
+                    jugador.x += nivel;
+                    if (jugador.x > canvas.width) {
+                        jugador.x = -10;
+                    }
+                }
+
+                if (lastPress == IZQ) {
+                    jugador.x -= nivel;
+                    if (jugador.x < 0) {
+                        jugador.x = canvas.width;
+                    }
+                }
+
+                if (lastPress == AR) {
+                    jugador.y -= nivel;
+                    if (jugador.y < 0) {
+                        jugador.y = canvas.height;
+                    }
+                }
+
+                if (lastPress == AB) {
+                    jugador.y += nivel;
+                    if (jugador.y >= canvas.height) {
+                        jugador.y = -10;
+                    }
+                }
+
+
+                if (jugador.intersects(obstaculo)) {
+                    obstaculo.x = random(canvas.width - 10);
+                    obstaculo.y = random(canvas.height - 10);
+                    puntaje += 1;
+                    if (puntaje > puntajeMax) {
+                        puntajeMax = puntaje;
+                    }
+                }
+
+            }
+
+            function run() {
+                window.requestAnimationFrame(run)
+                upt();
+                paint(ctx);
+            }
+
+            function init() {
+                canvas = document.getElementById('canvas');
+                ctx = canvas.getContext('2d');
+
+                jugador = new Rectangulo(x, y, 10, 10, "#1dcd55");
+                obstaculo = new Rectangulo((canvas.width / 2 - 10), (canvas.height / 2 - 10), 10, 10, "#fa5b05")
+
+
+                run();
+            }
+            window.addEventListener('load', init, false);
+            document.addEventListener('keydown', function (e) {
+                if (e.keyCode == 65 || e.keyCode == 37) {
+                    lastPress = IZQ;
+                }
+                if (e.keyCode == 87 || e.keyCode == 38) {
+                    lastPress = AR;
+                }
+                if (e.keyCode == 68 || e.keyCode == 39) {
+                    lastPress = DER;
+                }
+                if (e.keyCode == 83 || e.keyCode == 40) {
+                    lastPress = AB;
+                }
+
+            });
+
+            function random(x) {
+                return Math.floor(Math.random() * x);
+            }
+
+        }
+
+        //}
+    </script>
+
+</body>
+
+</html>
