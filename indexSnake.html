@@ -28,7 +28,7 @@
 
     <script type="text/javascript">
         var canvas = null, ctx = null, x = 0, y = 0;
-        var IZQ = 1, AR = 0, DER = 2, AB = 3;
+        var IZQ = 1, AR = 0, DER = 2, AB = 3, PAUSE = true;
         var lastPress = DER;
         var nivel = 1;
         var jugador = null, obstaculo = null;
@@ -94,40 +94,47 @@
             }
 
             function upt() {
-
-                if (lastPress == DER) {
-                    jugador.x += nivel;
-                    if (jugador.x > canvas.width) {
-                        jugador.x = -10;
+                if (PAUSE) {
+                    if (lastPress == DER) {
+                        jugador.x += nivel;
+                        if (jugador.x > canvas.width) {
+                            jugador.x = -10;
+                        }
                     }
-                }
 
-                if (lastPress == IZQ) {
-                    jugador.x -= nivel;
-                    if (jugador.x < 0) {
-                        jugador.x = canvas.width;
+                    if (lastPress == IZQ) {
+                        jugador.x -= nivel;
+                        if (jugador.x < 0) {
+                            jugador.x = canvas.width;
+                        }
                     }
-                }
 
-                if (lastPress == AR) {
-                    jugador.y -= nivel;
-                    if (jugador.y < 0) {
-                        jugador.y = canvas.height-25;
+                    if (lastPress == AR) {
+                        jugador.y -= nivel;
+                        if (jugador.y < 0) {
+                            jugador.y = canvas.height - 25;
+                        }
                     }
-                }
 
-                if (lastPress == AB) {
-                    jugador.y += nivel;
-                    if (jugador.y >= canvas.height-25) {
-                        jugador.y = -10;
+                    if (lastPress == AB) {
+                        jugador.y += nivel;
+                        if (jugador.y >= canvas.height - 25) {
+                            jugador.y = -10;
+                        }
                     }
-                }
 
 
-                if (jugador.intersects(obstaculo)) {
-                    obstaculo.x = random(canvas.width - 10);
-                    obstaculo.y = random(canvas.height - 30);
-                    sumarPuntos();
+                    if (jugador.intersects(obstaculo)) {
+                        obstaculo.x = random(canvas.width - 10);
+                        obstaculo.y = random(canvas.height - 30);
+                        sumarPuntos();
+                    }
+                } else {
+                    ctx.fillStyle = "#17a7da"
+                    ctx.fillRect(0, 360, canvas.width, 20);
+                    ctx.fillStyle = "#000";
+                    ctx.font = "12px Helvetica";
+                    ctx.fillText("PAUSE", 20, 377);
                 }
 
             }
@@ -155,19 +162,34 @@
             }
             window.addEventListener('load', init, false);
             document.addEventListener('keydown', function (e) {
-                if (e.keyCode == 65 || e.keyCode == 37) {
+                console.log(e.keyCode);
+                if (e.keyCode == 65 || e.keyCode == 37 && PAUSE) {
                     lastPress = IZQ;
                 }
-                if (e.keyCode == 87 || e.keyCode == 38) {
+                if (e.keyCode == 87 || e.keyCode == 38 && PAUSE) {
                     lastPress = AR;
                 }
-                if (e.keyCode == 68 || e.keyCode == 39) {
+                if (e.keyCode == 68 || e.keyCode == 39 && PAUSE) {
                     lastPress = DER;
                 }
-                if (e.keyCode == 83 || e.keyCode == 40) {
+                if (e.keyCode == 83 || e.keyCode == 40 && PAUSE) {
                     lastPress = AB;
                 }
-
+                if (e.keyCode == 80 || e.keyCode == 32) {
+                    if (PAUSE) {
+                        PAUSE = false;
+                    } else {
+                        PAUSE = true;
+                        ctx.fillStyle = "#17a7da"
+                        ctx.fillRect(0, 360, canvas.width, 20);
+                        ctx.fillStyle = "#000";
+                        ctx.font = "12px Helvetica";
+                        ctx.fillText("Puntaje: " + puntos, 20, 377);
+                        ctx.fillText("Vidas: " + vidas, 125, 377);
+                        ctx.fillText("Puntaje Max: " + puntajeMax, 200, 377);
+                    }
+                }
+                
             });
 
             function random(x) {
