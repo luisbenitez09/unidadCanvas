@@ -37,6 +37,9 @@
         var gameOver = true;
         var jugaImg = new Image();
         var obsImg = new Image();
+        var pauAu = new Audio();
+        var dieAu = new Audio();
+        var eatAu = new Audio();
             
         //--------------------------------------------------------------Ejercicio 12-----------------------------------------
 
@@ -139,6 +142,7 @@
                     if (jugador.intersects(obstaculo)) {
                         obstaculo.x = random(canvas.width - 10);
                         obstaculo.y = random(canvas.height - 30);
+                        eatAu.play();
                         sumarPuntos();
                     }
 
@@ -146,6 +150,7 @@
                         if (jugador.intersects(walls[i])) {
                             console.log("Perdiste");
                             gameOver = false;
+                            dieAu.play();
                             setTimeout('init()', 3000);
                         }
                     }
@@ -192,6 +197,11 @@
 
                 jugaImg.src = "assets/avatar.png";
                 obsImg.src = "assets/taquito.png";
+                obsImg.src = "assets/taquito.png";
+
+                pauAu.src = "assets/pause.mp3";
+                eatAu.src = "assets/eat.mp3";
+                dieAu.src = "assets/die.mp3";
 
                 
 
@@ -216,6 +226,7 @@
                 if (e.keyCode == 80 || e.keyCode == 32) {
                     if (PAUSE) {
                         PAUSE = false;
+                        pauAu.play();
                     } else {
                         PAUSE = true;
                         ctx.fillStyle = "#17a7da"
