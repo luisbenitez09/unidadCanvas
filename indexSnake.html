@@ -33,6 +33,10 @@
         var nivel = 1;
         var jugador = null, obstaculo = null;
         var vidas = 5, puntos = 0, puntajeMax = 0;
+        var walls;
+        var gameOver = true;
+        var jugaImg = new Image();
+        var obsImg = new Image();
             
         //--------------------------------------------------------------Ejercicio 12-----------------------------------------
 
@@ -81,20 +85,28 @@
                 ctx.fillText("Puntaje: "+ puntos, 20,377);
                 ctx.fillText("Vidas: " + vidas, 125,377);
                 ctx.fillText("Puntaje Max: " + puntajeMax, 200,377);
-                
 
             }
 
             function paint(ctx) {
                 ctx.fillStyle = "#000   ";
                 ctx.fillRect(0, 0, canvas.width, canvas.height-15);
-                jugador.paint(ctx);
-                obstaculo.paint(ctx);
-                
+                //jugador.paint(ctx);
+                //obstaculo.paint(ctx);
+                ctx.drawImage(jugaImg, jugador.x, jugador.y);
+                ctx.drawImage(obsImg, obstaculo.x, obstaculo.y);
+                for (var i = walls.length - 1; i >= 0; i--) {
+                    walls[i].paint(ctx);
+                }
+                if (!gameOver) {
+                    ctx.fillStyle = "white";
+                    ctx.textAlign = "center";
+                    ctx.fillText("GAME OVER", 197, 150);
+                }
             }
 
             function upt() {
-                if (PAUSE) {
+                if (PAUSE && gameOver) {
                     if (lastPress == DER) {
                         jugador.x += nivel;
                         if (jugador.x > canvas.width) {
@@ -129,6 +141,15 @@
                         obstaculo.y = random(canvas.height - 30);
                         sumarPuntos();
                     }
+
+                    for (var i = walls.length - 1; i >= 0; i--) {
+                        if (jugador.intersects(walls[i])) {
+                            console.log("Perdiste");
+                            gameOver = false;
+                            setTimeout('init()', 3000);
+                        }
+                    }
+
                 } else {
                     ctx.fillStyle = "#17a7da"
                     ctx.fillRect(0, 360, canvas.width, 20);
@@ -149,8 +170,19 @@
                 canvas = document.getElementById('canvas');
                 ctx = canvas.getContext('2d');
 
+                gameOver = true;
+                lastPress = DER;
+                puntos = 0;
+                nivel = 1; 
+
+                walls = new Array();
+
                 jugador = new Rectangulo(x, y, 10, 10, "#1dcd55");
                 obstaculo = new Rectangulo((canvas.width / 2 - 10), (canvas.height / 2 - 10), 10, 10, "#fa5b05")
+                walls.push(new Rectangulo(random(canvas.width - 10), random(canvas.height - 30), 10, 10, "gray"));
+                walls.push(new Rectangulo(random(canvas.width - 10), random(canvas.height - 30), 10, 10, "gray"));
+                walls.push(new Rectangulo(random(canvas.width - 10), random(canvas.height - 30), 10, 10, "gray"));
+                walls.push(new Rectangulo(random(canvas.width - 10), random(canvas.height - 30), 10, 10, "gray"));
 
                 ctx.fillStyle = "#000";
                 ctx.font = "12px Helvetica";
@@ -158,9 +190,15 @@
                 ctx.fillText("Vidas: " + vidas, 125,377);
                 ctx.fillText("Puntaje Max: " + puntajeMax, 200,377);
 
+                jugaImg.src = "assets/avatar.png";
+                obsImg.src = "assets/taquito.png";
+
+                
+
                 run();
             }
             window.addEventListener('load', init, false);
+
             document.addEventListener('keydown', function (e) {
                 console.log(e.keyCode);
                 if (e.keyCode == 65 || e.keyCode == 37 && PAUSE) {
