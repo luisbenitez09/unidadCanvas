@@ -29,7 +29,7 @@
     <script type="text/javascript">
         var canvas = null, ctx = null, x = 0, y = 220;
         var IZQ = 1, AR = 0, DER = 2, AB = 3;
-        var lastPress = DER;
+        var lastPress = DER, win = false;
         var nivel = 5;
         var jugador = null, obstaculo = null;
         var walls;
@@ -72,6 +72,9 @@
                 }
             }
 
+            function restart() {
+                jugador = new Rectangulo(x, y, 10, 10, "#1dcd55");
+            }
 
             function paint(ctx) {
                 ctx.fillStyle = "#000";
@@ -81,12 +84,21 @@
                 for (var i = walls.length - 1; i >= 0; i--) {
                     walls[i].paint(ctx);
                 }
+                if (win) {
+                    ctx.fillStyle = "red";
+                    ctx.textAlign = "center";
+                    ctx.font = "30px Helvetica";
+                    ctx.fillText("Ganaste", canvas.width/2, canvas.height/2-60);
+                }
             }
 
             function upt() {
 
                 if (jugador.intersects(obstaculo)) {
                     winAu.play();
+                    win = true;
+                    setTimeout('init()',3000);
+                    restart();
                 }
 
                 //Evitar que se encime en las paredes
@@ -118,7 +130,7 @@
                 ctx = canvas.getContext('2d');
                 lastPress = DER;
                 nivel = 5; 
-
+                win=false;
                 walls = [];
 
                 jugador = new Rectangulo(x, y, 10, 10, "#1dcd55");
